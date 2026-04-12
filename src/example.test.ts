@@ -1,33 +1,32 @@
 import 'reflect-metadata';
 import { Entity, PrimaryKey, Property, ReflectMetadataProvider } from '@mikro-orm/decorators/legacy';
-import { IType, MikroORM, wrap } from '@mikro-orm/sqlite';
+import { defineEntity, IType, MikroORM, p, wrap } from '@mikro-orm/sqlite';
 
-@Entity()
-class User1 {
-
-  @PrimaryKey()
-  id!: number;
-
-  @Property({ serializer: (v: string) => new Date(parseInt(v)).toISOString() })
-  createdAt: IType<Date, number, string>;
-
-  constructor(createdAt: Date) {
-    this.createdAt = createdAt;
+const UserSchema = defineEntity({
+  name: 'User1',
+  properties: {
+    createdAt: p.datetime()
+      .onCreate(() => new Date())
+      .$type<Date, number, string>()
+      .serializer((v) => v.toISOString()),
+    id: p.integer().primary()
   }
-}
+});
+
+class User1 extends UserSchema.class {}
+UserSchema.setClass(User1);
+
 @Entity()
 class User2 {
 
   @PrimaryKey()
   id!: number;
 
-  // @Property({ serializer: (v: Date) => v.toISOString() })
-  @Property({ serializer: (v: string) => new Date(parseInt(v)).toISOString() })
-  createdAt: IType<Date, number, string>;
-
-  constructor(createdAt: Date) {
-    this.createdAt = createdAt;
-  }
+  @Property({
+    serializer: (v: Date) => v.toISOString(),
+    onCreate: () => new Date()
+  })
+  createdAt!: IType<Date, number, string>;
 }
 
 let orm: MikroORM;
@@ -47,29 +46,30 @@ afterAll(async () => {
   await orm.close(true);
 });
 
-test('Scalar Date is a Date', async () => {
-  const createdAt = new Date();
-  orm.em.create(User1, { createdAt });
-  await orm.em.flush();
-  orm.em.clear();
+let id = 0;
+Object.entries({ User1, User2 }).map((([name, User]) => {
+  test(`${name}: Scalar Date is a Date`, async () => {
+    const createdAt = new Date();
+    orm.em.create(User, { id: ++id, createdAt });
+    await orm.em.flush();
+    orm.em.clear();
 
-  const user = await orm.em.findOneOrFail(User1, { createdAt });
-  // Runtime type in sqlite is string, not Date
-  expectTypeOf(wrap(user).toObject().createdAt).toEqualTypeOf<Date>();
-  assert(user.createdAt instanceof Date);
-});
+    const user = await orm.em.findOneOrFail(User, { id });
+    // Runtime type in sqlite should be Date
+    expectTypeOf(user.createdAt).toExtend<Date>();
+    assert(user.createdAt instanceof Date);
+  });
 
-test('explicit serialization with IType has expected type', async () => {
-  const createdAt = new Date();
-  orm.em.create(User2, { createdAt });
-  await orm.em.flush();
-  orm.em.clear();
+  test(`${name}: explicit serialization with IType has expected type`, async () => {
+    const createdAt = new Date();
+    orm.em.create(User, { id: ++id, createdAt });
+    await orm.em.flush();
+    orm.em.clear();
 
-  const user = await orm.em.findOneOrFail(User2, { createdAt });
+    const user = await orm.em.findOneOrFail(User, { id });
 
-  // Serialized type is not string, as expected
-  // expectTypeOf(wrap(user).toObject().createdAt).toEqualTypeOf<IType<Date, number, string>>();
-  expectTypeOf(wrap(user).toObject().createdAt).toEqualTypeOf<string>();
-  assert(typeof wrap(user).toObject().createdAt === 'string');
-});
-
+    // Serialized type should be string
+    expectTypeOf(wrap(user).toObject().createdAt).toEqualTypeOf<string>();
+    assert(typeof wrap(user).toObject().createdAt === 'string');
+  });
+}));
