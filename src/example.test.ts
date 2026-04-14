@@ -1,6 +1,31 @@
 import 'reflect-metadata';
 import { Entity, PrimaryKey, Property, ReflectMetadataProvider } from '@mikro-orm/decorators/legacy';
-import { defineEntity, IType, MikroORM, p, wrap } from '@mikro-orm/sqlite';
+import { defineEntity, EntityProperty, IType, MikroORM, p, Platform, Type, wrap } from '@mikro-orm/sqlite';
+
+export const Status = ['new', 'active', 'deleted'] as const;
+const ReverseStatus = Object.fromEntries(Object.entries(Status).map(([k, v]) => [v, Number.parseInt(k)]));
+
+class StatusType extends Type<typeof Status[number], number> {
+  compareAsType() {
+    return 'number';
+  }
+
+  convertToDatabaseValue(value: typeof Status[number]) {
+    return ReverseStatus[value];
+  }
+
+  convertToJSValue(value: number) {
+    return Status[value];
+  }
+
+  ensureComparable() {
+    return false;
+  }
+
+  getColumnType(prop: EntityProperty, platform: Platform) {
+    return platform.getIntegerTypeDeclarationSQL(prop);
+  }
+}
 
 const UserSchema = defineEntity({
   name: 'User1',
@@ -9,7 +34,10 @@ const UserSchema = defineEntity({
       .onCreate(() => new Date())
       .$type<Date, number, string>()
       .serializer((v) => v.toISOString()),
-    id: p.integer().primary()
+    id: p.integer().primary(),
+    status: p.type(StatusType)
+      .$type<typeof Status[number], number, typeof Status[number]>()
+      .default('new'),
   }
 });
 
@@ -72,4 +100,17 @@ Object.entries({ User1, User2 }).map((([name, User]) => {
     expectTypeOf(wrap(user).toObject().createdAt).toEqualTypeOf<string>();
     assert(typeof wrap(user).toObject().createdAt === 'string');
   });
+
 }));
+
+test('assign runtime value to custom type', async () => {
+  orm.em.create(User1, { id: ++id, createdAt: new Date() });
+  await orm.em.flush();
+  orm.em.clear();
+
+  const user = await orm.em.findOneOrFail(User1, { id });
+  // expected to work like: user.status = 'active';
+  wrap(user).assign({ status: 'active' });
+  await orm.em.flush();
+  assert(true);
+});
