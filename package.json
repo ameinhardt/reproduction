@@ -3,6 +3,7 @@
   "private": true,
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "vitest run",
     "test": "vitest run",
@@ -11,14 +12,19 @@
   "author": "Martin Adamek",
   "license": "MIT",
   "dependencies": {
-    "@mikro-orm/core": "next",
-    "@mikro-orm/decorators": "next",
-    "@mikro-orm/sqlite": "next",
+    "@mikro-orm/cli": "^7.0.12",
+    "@mikro-orm/core": "7.0.12",
+    "@mikro-orm/decorators": "7.0.12",
+    "@mikro-orm/migrations": "7.0.12",
+    "@mikro-orm/migrations-mongodb": "^7.0.12",
+    "@mikro-orm/mongodb": "^7.0.12",
+    "@mikro-orm/sqlite": "7.0.12",
     "reflect-metadata": "^0.2.2"
   },
   "devDependencies": {
-    "@types/node": "^25.5.0",
-    "typescript": "^5.8.0",
-    "vitest": "^4.1.0"
+    "@types/node": "^25.6.0",
+    "@types/yargs": "^17.0.35",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.5"
   }
 }
