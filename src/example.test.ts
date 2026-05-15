@@ -47,6 +47,6 @@ test(`can be deleted`, async () => {
   // wrongly uses: delete from `user` where `id` in (3) and `type` = 'user' 
   em.remove(casual);
   await em.flush();
-  const deadBody = await em.findOne(CasualUser, { id: 3 });
-  assert(casual == null);
+  const deadBody = await em.findOne(CasualUser, { id: casual.id });
+  assert(deadBody == null);
 });
