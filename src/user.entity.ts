@@ -1,14 +1,38 @@
 import { defineEntity, p } from "@mikro-orm/core";
 
-const UserSchema = defineEntity({
+export const UserTypes = ['user', 'casual', 'heavy'] as const;
+export type UserType = typeof UserTypes[number];
+
+export const UserSchema = defineEntity({
+  discriminatorColumn: 'type',
+  discriminatorValue: 'user',
   name: 'User',
   properties: {
-    _id: p.integer().primary(),
+    id: p.integer().primary(),
     createdAt: p.datetime()
-      .onCreate(() => new Date())
+      .onCreate(() => new Date()),
+    type: p.enum(UserTypes).hidden()
   }
 });
-class User extends UserSchema.class {}
+export class User extends UserSchema.class {}
 UserSchema.setClass(User);
 
-export default User;
+const CasualUserSchema = defineEntity({
+  discriminatorValue: 'casual',
+  extends: UserSchema,
+  name: 'CasualUser',
+  properties: {}
+});
+
+export class CasualUser extends CasualUserSchema.class {}
+CasualUserSchema.setClass(CasualUser);
+
+export const HeavyUserSchema = defineEntity({
+  discriminatorValue: 'heavy',
+  extends: UserSchema,
+  name: 'HeavyUser',
+  properties: {}
+});
+
+export class HeavyUser extends HeavyUserSchema.class {}
+HeavyUserSchema.setClass(HeavyUser);

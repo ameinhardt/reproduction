@@ -12,13 +12,11 @@
   "author": "Martin Adamek",
   "license": "MIT",
   "dependencies": {
-    "@mikro-orm/cli": "^7.0.12",
-    "@mikro-orm/core": "7.0.12",
-    "@mikro-orm/decorators": "7.0.12",
-    "@mikro-orm/migrations": "7.0.12",
-    "@mikro-orm/migrations-mongodb": "^7.0.12",
-    "@mikro-orm/mongodb": "^7.0.12",
-    "@mikro-orm/sqlite": "7.0.12",
+    "@mikro-orm/cli": "7.0.16",
+    "@mikro-orm/core": "7.0.16",
+    "@mikro-orm/decorators": "7.0.16",
+    "@mikro-orm/migrations": "7.0.16",
+    "@mikro-orm/sqlite": "7.0.16",
     "reflect-metadata": "^0.2.2"
   },
   "devDependencies": {
