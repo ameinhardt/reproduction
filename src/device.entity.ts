@@ -1,12 +1,12 @@
 import { defineEntity, p } from "@mikro-orm/core";
-import { User } from "./user.entity.ts";
+import { HeavyUser, CasualUser, NormalUser } from "./user.entity.ts";
 
 export const DeviceSchema = defineEntity({
-  name: 'Device',
+  name: 'Engagement',
   properties: {
     id: p.integer().primary(),
-    name: p.string(),
-    users: () => p.manyToMany(User).groups('device').inversedBy('devices'),
+    heavyUsers: () => p.manyToMany(CasualUser).strictNullable(),
+    normalUsers: () => p.manyToMany(NormalUser).inversedBy('devices')
   }
 });
 export class Device extends DeviceSchema.class {}
