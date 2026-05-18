@@ -20,8 +20,8 @@ Object.entries({
     test(`${name}: can be deleted`, async () => {
       const em = orm.em.fork();
       // Removing the 'heavyUsers' pointer from Device (and counterpart from HeavyUser) lets this test succeed
-      assert(em.getMetadata(NormalUser).bidirectionalRelations.find((prop) => prop.name === 'devices' as EntityKey<CasualUser>) != null, "NormalUser has a 'devices' relation");
-      assert(em.getMetadata(CasualUser).bidirectionalRelations.find((prop) => prop.name === 'devices' as EntityKey<CasualUser>) == null, "CasualUser does not have 'devices' relation");
+      assert(em.getMetadata(NormalUser).bidirectionalRelations.find((prop) => prop.name === 'devices') != null, "NormalUser has a 'devices' bidirectionalRelations");
+      assert(em.getMetadata(CasualUser).bidirectionalRelations.find((prop) => prop.name === 'devices' as EntityKey<CasualUser>) == null, "CasualUser does not have 'devices' bidirectionalRelations");
       
       await em.flush();
     });
