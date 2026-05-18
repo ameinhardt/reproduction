@@ -1,11 +1,12 @@
 import { defineEntity, p } from "@mikro-orm/core";
+import { Device } from "./device.entity.ts";
 
-export const UserTypes = ['user', 'casual', 'heavy'] as const;
+export const UserTypes = ['casual', 'heavy'] as const;
 export type UserType = typeof UserTypes[number];
 
 export const UserSchema = defineEntity({
   discriminatorColumn: 'type',
-  discriminatorValue: 'user',
+  abstract: true,
   name: 'User',
   properties: {
     id: p.integer().primary(),
@@ -31,7 +32,9 @@ export const HeavyUserSchema = defineEntity({
   discriminatorValue: 'heavy',
   extends: UserSchema,
   name: 'HeavyUser',
-  properties: {}
+  properties: {
+    devices: () => p.manyToMany(Device).strictNullable().mappedBy('users') //.hidden(),
+  }
 });
 
 export class HeavyUser extends HeavyUserSchema.class {}
