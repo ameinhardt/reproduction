@@ -43,6 +43,8 @@ Object.entries({
       em1.flush();
       
       const em2 = orm.em.fork();
+      // ValidationError: You cannot modify inverse side of M:N collection CasualUser.devices when the owning side is not initialized. Consider working with the owning side instead (Device.normalUsers)
+      // but CasualUser doesn't have any relation!
       const user = await em2.findOne(CasualUser, { id });
       assert(user != null);
       em2.remove(user);
