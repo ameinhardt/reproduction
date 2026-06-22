@@ -1,5 +1,4 @@
 import { HeavyUser, CasualUser, NormalUser } from "./user.entity.ts";
-import { Device } from "./device.entity.ts";
 import { defineConfig as defineSqlConfig, MongoNamingStrategy, NodeSqliteDialect, SqlEntityManager, SqliteDriver } from '@mikro-orm/sqlite';
 import { defineConfig as defineMongoConfig } from '@mikro-orm/mongodb';
 import { MongoMemoryServer } from 'mongodb-memory-server';
@@ -26,7 +25,7 @@ const mongoConfig = defineMongoConfig({
     driverOptions: {
       connectTimeoutMS: 120 * 60 * 1000
     },
-    entities: [HeavyUser, Device, CasualUser, NormalUser],
+    entities: [HeavyUser, CasualUser, NormalUser],
     entityManager: MongoEntityManager,
     namingStrategy: MongoIdNamingStrategy,
   }),
@@ -36,7 +35,7 @@ const mongoConfig = defineMongoConfig({
     driver: SqliteDriver,
     driverOptions: new NodeSqliteDialect(':memory:'),
     entityManager: SqlEntityManager,
-    entities: [HeavyUser, Device, CasualUser, NormalUser],
+    entities: [HeavyUser, CasualUser, NormalUser],
     allowGlobalContext: true, // only for testing
   });
 

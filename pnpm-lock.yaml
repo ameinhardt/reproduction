@@ -9,23 +9,23 @@ importers:
   .:
     dependencies:
       '@mikro-orm/cli':
-        specifier: 7.0.18-dev.10
-        version: 7.0.18-dev.10
+        specifier: 7.1.4
+        version: 7.1.4
       '@mikro-orm/core':
-        specifier: 7.0.18-dev.10
-        version: 7.0.18-dev.10
+        specifier: 7.1.4
+        version: 7.1.4
       '@mikro-orm/decorators':
-        specifier: 7.0.18-dev.10
-        version: 7.0.18-dev.10(@mikro-orm/core@7.0.18-dev.10)(reflect-metadata@0.2.2)
+        specifier: 7.1.4
+        version: 7.1.4(@mikro-orm/core@7.1.4)(reflect-metadata@0.2.2)
       '@mikro-orm/migrations':
-        specifier: 7.0.18-dev.10
-        version: 7.0.18-dev.10(@mikro-orm/core@7.0.18-dev.10)
+        specifier: 7.1.4
+        version: 7.1.4(@mikro-orm/core@7.1.4)
       '@mikro-orm/mongodb':
-        specifier: 7.0.18-dev.10
-        version: 7.0.18-dev.10(@mikro-orm/core@7.0.18-dev.10)
+        specifier: 7.1.4
+        version: 7.1.4(@mikro-orm/core@7.1.4)
       '@mikro-orm/sqlite':
-        specifier: 7.0.18-dev.10
-        version: 7.0.18-dev.10(@mikro-orm/core@7.0.18-dev.10)
+        specifier: 7.1.4
+        version: 7.1.4(@mikro-orm/core@7.1.4)
       mongodb-memory-server:
         specifier: ^11.1.0
         version: 11.1.0
@@ -63,13 +63,13 @@ packages:
   '@jridgewell/sourcemap-codec@1.5.5':
     resolution: {integrity: sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og==}
 
-  '@mikro-orm/cli@7.0.18-dev.10':
-    resolution: {integrity: sha512-aKpsi0iXCSwG9V8ZRaVoOm110i4yOCkh+UJ/6uPuSIdY8HuRZEqlD3rule2guicm+4wQ52zpjT3NyEHu5IjBKg==}
+  '@mikro-orm/cli@7.1.4':
+    resolution: {integrity: sha512-o1AQgwVJ3i8fGpR+48bSTum/Ar5u38WfyX1HykoPR03M5IdOHJ2QdiwA0o58TsA5xd0U+IlhlNLJEwZ8XCNXGA==}
     engines: {node: '>= 22.17.0'}
     hasBin: true
 
-  '@mikro-orm/core@7.0.18-dev.10':
-    resolution: {integrity: sha512-CQqcPBxkz02INPs5bdN5EmQFavptMyW1spDjzPZ4AFAOTdNHHDL2yh4bU5c7oR2ixeJmaJJGekIFqQi4WTAjaQ==}
+  '@mikro-orm/core@7.1.4':
+    resolution: {integrity: sha512-JPpOoBw2r98hVmsa7kFdt9HDqTa6/x9dhLL2MZRJQt1HwNg7S7A6Eh+nJ21dmB5QfXhu2PXqt03Y+xZZDnUD0w==}
     engines: {node: '>= 22.17.0'}
     peerDependencies:
       dataloader: 2.2.3
@@ -77,39 +77,39 @@ packages:
       dataloader:
         optional: true
 
-  '@mikro-orm/decorators@7.0.18-dev.10':
-    resolution: {integrity: sha512-pidzQuOKswwht1bixabvTu6ldi6icJ15He06uSZHOv10cYbRHy57D28mQypJSqsR2vJXtPCVoxJf14SHUGbRDw==}
+  '@mikro-orm/decorators@7.1.4':
+    resolution: {integrity: sha512-3OSFkdgi39c/kFJ89/ylDZ27n5WV3uJgqrAMNVjrAxQs9xByt6mzoTBsWuU/EdNqw3yBLR43FNwTNPc1lWQ7lA==}
     engines: {node: '>= 22.17.0'}
     peerDependencies:
-      '@mikro-orm/core': 7.0.18-dev.10
+      '@mikro-orm/core': 7.1.4
       reflect-metadata: ^0.1.0 || ^0.2.0
     peerDependenciesMeta:
       reflect-metadata:
         optional: true
 
-  '@mikro-orm/migrations@7.0.18-dev.10':
-    resolution: {integrity: sha512-BRoyIK2yRKmsINM/ZT5sU3Q6dttHljkdWBMkV3aDfbwqxAp5HP2z+kdQ7UvO4OI29hvzy+7413bYp3LdA5aHlA==}
+  '@mikro-orm/migrations@7.1.4':
+    resolution: {integrity: sha512-M9rsHpuuaWavoXb0yitgwb+Dy2wzIEzFh5cdJ1NHjPVwyWrTiTTcKmZUiytvHInzLvusuTomRKNRiNUENqnFvQ==}
     engines: {node: '>= 22.17.0'}
     peerDependencies:
-      '@mikro-orm/core': 7.0.18-dev.10
+      '@mikro-orm/core': 7.1.4
 
-  '@mikro-orm/mongodb@7.0.18-dev.10':
-    resolution: {integrity: sha512-NKKc7jxfj2x+rPH/FXMO46PcqfEnl/LYtZl2QO78/K4ESb2jf8pmnOSweOmWa/hSPuzDyMxY0r4yYCl80slyfg==}
+  '@mikro-orm/mongodb@7.1.4':
+    resolution: {integrity: sha512-b59cuyPUObPMvuhMC6JySi2LTNl8Zuk5INABAUlZsXZi649MvrfRpprcvS7zUNSLoMQZfI927jXmS+goT7rYnw==}
     engines: {node: '>= 22.17.0'}
     peerDependencies:
-      '@mikro-orm/core': 7.0.18-dev.10
+      '@mikro-orm/core': 7.1.4
 
-  '@mikro-orm/sql@7.0.18-dev.10':
-    resolution: {integrity: sha512-ebzPujJAI79CJYXkCLqfZbCprmXM0r0sV1fx1ogXo/GTtgtatIjKTBDNL/CV5QUU315LzF3LvTJfGn9tuDaU3A==}
+  '@mikro-orm/sql@7.1.4':
+    resolution: {integrity: sha512-YOie3z0Y24XlzWPUrATGJja5U6Ij81gji9yEDT6JkZxJH9uF1tbmZ2qX9WHectnMB5h8JHCic5AMvaflhBviNg==}
     engines: {node: '>= 22.17.0'}
     peerDependencies:
-      '@mikro-orm/core': 7.0.18-dev.10
+      '@mikro-orm/core': 7.1.4
 
-  '@mikro-orm/sqlite@7.0.18-dev.10':
-    resolution: {integrity: sha512-8L+YldaAFPMqvtBtYWaeQWZlqlYAm/SRNaGg7xJaepVV4aGYTVdG1nOrC/xV5457lFWWDcDvIeuiu79ByaBlzw==}
+  '@mikro-orm/sqlite@7.1.4':
+    resolution: {integrity: sha512-0Buc7GMkib22SliR4dj4O3Yzs26k8lzRn5xRRpgkLpt+Mlse9ac3Mk+2ilLTwsjHm2yoIIRQbfNnhVk1z0UoSw==}
     engines: {node: '>= 22.17.0'}
     peerDependencies:
-      '@mikro-orm/core': 7.0.18-dev.10
+      '@mikro-orm/core': 7.1.4
 
   '@mongodb-js/saslprep@1.4.11':
     resolution: {integrity: sha512-o9rAHc0IpIjuPSxRutWpE1F62x7n+4mVS4rCNHkzhIUMQcc18bb6xEq5wd2NdN0WjepIyXIppRshYI2kQDOZVA==}
@@ -606,8 +606,8 @@ packages:
   memory-pager@1.5.0:
     resolution: {integrity: sha512-ZS4Bp4r/Zoeq6+NLJpP+0Zzm0pR8whtGPf1XExKLJBAczGMnSi3It14OiNCStjQjM6NU1okjQGSxgEZN8eBYKg==}
 
-  mikro-orm@7.0.18-dev.10:
-    resolution: {integrity: sha512-x7biJRb9+Qh5pIITZdihYZ6KPLGfkbePOvwYicuICs1duTamT4VqI0hhPbl7+F46xqBCXr1AC3nKFRA6wuwQKQ==}
+  mikro-orm@7.1.4:
+    resolution: {integrity: sha512-6e71y7tgSWNHMPCsTBxAaEaeBKly99fCYIOByrUVTAP/lm/N9iHYVEATeC7/oqVDYINDzdlJGKk9RI8objPl4A==}
     engines: {node: '>= 22.17.0'}
 
   mimic-response@3.1.0:
@@ -998,30 +998,30 @@ snapshots:
 
   '@jridgewell/sourcemap-codec@1.5.5': {}
 
-  '@mikro-orm/cli@7.0.18-dev.10':
+  '@mikro-orm/cli@7.1.4':
     dependencies:
-      '@mikro-orm/core': 7.0.18-dev.10
-      mikro-orm: 7.0.18-dev.10
+      '@mikro-orm/core': 7.1.4
+      mikro-orm: 7.1.4
       yargs: 17.7.2
     transitivePeerDependencies:
       - dataloader
 
-  '@mikro-orm/core@7.0.18-dev.10': {}
+  '@mikro-orm/core@7.1.4': {}
 
-  '@mikro-orm/decorators@7.0.18-dev.10(@mikro-orm/core@7.0.18-dev.10)(reflect-metadata@0.2.2)':
+  '@mikro-orm/decorators@7.1.4(@mikro-orm/core@7.1.4)(reflect-metadata@0.2.2)':
     dependencies:
-      '@mikro-orm/core': 7.0.18-dev.10
+      '@mikro-orm/core': 7.1.4
     optionalDependencies:
       reflect-metadata: 0.2.2
 
-  '@mikro-orm/migrations@7.0.18-dev.10(@mikro-orm/core@7.0.18-dev.10)':
+  '@mikro-orm/migrations@7.1.4(@mikro-orm/core@7.1.4)':
     dependencies:
-      '@mikro-orm/core': 7.0.18-dev.10
-      '@mikro-orm/sql': 7.0.18-dev.10(@mikro-orm/core@7.0.18-dev.10)
+      '@mikro-orm/core': 7.1.4
+      '@mikro-orm/sql': 7.1.4(@mikro-orm/core@7.1.4)
 
-  '@mikro-orm/mongodb@7.0.18-dev.10(@mikro-orm/core@7.0.18-dev.10)':
+  '@mikro-orm/mongodb@7.1.4(@mikro-orm/core@7.1.4)':
     dependencies:
-      '@mikro-orm/core': 7.0.18-dev.10
+      '@mikro-orm/core': 7.1.4
       mongodb: 7.2.0
     transitivePeerDependencies:
       - '@aws-sdk/credential-providers'
@@ -1032,15 +1032,15 @@ snapshots:
       - snappy
       - socks
 
-  '@mikro-orm/sql@7.0.18-dev.10(@mikro-orm/core@7.0.18-dev.10)':
+  '@mikro-orm/sql@7.1.4(@mikro-orm/core@7.1.4)':
     dependencies:
-      '@mikro-orm/core': 7.0.18-dev.10
+      '@mikro-orm/core': 7.1.4
       kysely: 0.29.2
 
-  '@mikro-orm/sqlite@7.0.18-dev.10(@mikro-orm/core@7.0.18-dev.10)':
+  '@mikro-orm/sqlite@7.1.4(@mikro-orm/core@7.1.4)':
     dependencies:
-      '@mikro-orm/core': 7.0.18-dev.10
-      '@mikro-orm/sql': 7.0.18-dev.10(@mikro-orm/core@7.0.18-dev.10)
+      '@mikro-orm/core': 7.1.4
+      '@mikro-orm/sql': 7.1.4(@mikro-orm/core@7.1.4)
       better-sqlite3: 12.10.0
       kysely: 0.29.2
 
@@ -1427,7 +1427,7 @@ snapshots:
 
   memory-pager@1.5.0: {}
 
-  mikro-orm@7.0.18-dev.10: {}
+  mikro-orm@7.1.4: {}
 
   mimic-response@3.1.0: {}
 

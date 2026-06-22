@@ -1,54 +1,43 @@
-import { EntityKey, MikroORM, Options } from '@mikro-orm/core';
+import { MikroORM } from '@mikro-orm/core';
+import type { Options } from '@mikro-orm/core';
 import { CasualUser, NormalUser } from './user.entity.ts';
 import { sqlConfig, mongoConfig } from './mikro-orm.config.ts'
 
 let orm: MikroORM;
 
 Object.entries({
-  // sql: sqlConfig,
+  sql: sqlConfig,
   mongo: mongoConfig
 }).forEach(([name, config]) => {
   describe(name, () => {
     beforeAll(async () => {
       orm = await MikroORM.init(config as Partial<Options>);
       await orm.schema.refresh();
+      const em = orm.em.fork();
+
+      em.create(CasualUser, {
+        id: '1',
+        name: 'Casual User',
+        age: 20,
+        type: 'casual'
+      });
+      em.create(NormalUser, {
+        id: '2',
+        name: 'Normal User',
+        type: 'normal'
+      });
+      em.flush();
     });
 
     afterAll(async () => {
       await orm.close();
     });
 
-     test(`${name}: can be deleted when in one em`, async () => {
+     test(`${name}: normal user doesn't have age property`, async () => {
       const em = orm.em.fork();
       
-      const { id } = em.create(CasualUser, {
-        name: 'Casual User',
-        type: 'casual'
-      });
-      em.flush();
-      
-      const user = await em.findOne(CasualUser, { id });
-      assert(user != null);
-      em.remove(user);
-      await em.flush();
-    });
-
-    test(`${name}: can be deleted when in two em`, async () => {
-      const em1 = orm.em.fork();
-      
-      const { id } = em1.create(CasualUser, {
-        name: 'Casual User',
-        type: 'casual'
-      });
-      em1.flush();
-      
-      const em2 = orm.em.fork();
-      // ValidationError: You cannot modify inverse side of M:N collection CasualUser.devices when the owning side is not initialized. Consider working with the owning side instead (Device.normalUsers)
-      // but CasualUser doesn't have any relation!
-      const user = await em2.findOne(CasualUser, { id });
-      assert(user != null);
-      em2.remove(user);
-      await em2.flush();
+      const user = await em.findOne(NormalUser, { id: '2' });
+      assert(user != null && !('age' in user));
     });
   });
 });
