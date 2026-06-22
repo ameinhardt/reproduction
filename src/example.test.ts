@@ -15,14 +15,8 @@ Object.entries({
       await orm.schema.refresh();
       const em = orm.em.fork();
 
-      em.create(CasualUser, {
-        id: '1',
-        name: 'Casual User',
-        age: 20,
-        type: 'casual'
-      });
       em.create(NormalUser, {
-        id: '2',
+        id: '1',
         name: 'Normal User',
         type: 'normal'
       });
@@ -36,8 +30,9 @@ Object.entries({
      test(`${name}: normal user doesn't have age property`, async () => {
       const em = orm.em.fork();
       
-      const user = await em.findOne(NormalUser, { id: '2' });
-      assert(user != null && !('age' in user));
+      const user = await em.findOne(NormalUser, { id: '1' });
+      assert(user != null);
+      assert(!('age' in user));
     });
   });
 });

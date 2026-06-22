@@ -1,4 +1,4 @@
-import { HeavyUser, CasualUser, NormalUser } from "./user.entity.ts";
+import { HeavyUser, CasualUser, NormalUser} from "./user.entity.ts";
 import { defineConfig as defineSqlConfig, MongoNamingStrategy, NodeSqliteDialect, SqlEntityManager, SqliteDriver } from '@mikro-orm/sqlite';
 import { defineConfig as defineMongoConfig } from '@mikro-orm/mongodb';
 import { MongoMemoryServer } from 'mongodb-memory-server';
